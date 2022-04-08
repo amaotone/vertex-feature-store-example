@@ -7,24 +7,27 @@ terraform {
 }
 
 variable "project_id" {}
+variable "region" {}
+variable "zone" {}
+
+locals {
+  feature_store = {
+    name = "example"
+    entity_types = toset([
+      "movie", "user"
+    ])
+    fixed_node_count = 1
+  }
+}
 
 provider "google" {
   project = var.project_id
-  region  = "asia-northeast1"
-  zone    = "asia-northeast1-c"
+  region  = var.region
+  zone    = var.zone
 }
 
 provider "google-beta" {
   project = var.project_id
-  region  = "asia-northeast1"
-  zone    = "asia-northeast1-c"
-}
-
-resource "google_vertex_ai_featurestore" "featurestore" {
-  provider = google-beta
-  name     = "example_feature_store"
-
-  online_serving_config {
-    fixed_node_count = 0
-  }
+  region  = var.region
+  zone    = var.zone
 }
