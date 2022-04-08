@@ -1,5 +1,1 @@
-# Vertex Feature Store Example
-
-## Overview
-
-Vertex Feature Store に
+# [wip] Vertex Feature Store Example
